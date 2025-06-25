@@ -96,6 +96,11 @@
                 pageContent = `Handles click events (raycasting).`
                 code = `handleClickRaycast();`
                 break
+            case "getCameraPos":
+                pageName = "getCameraPos"
+                pageContent = "Returns the current x, y and z positions of the camera"
+                code = "getCameraPos()"
+                break
             default:
                 pageName = "Error"
                 pageContent = "Page not found."
@@ -137,6 +142,7 @@
       <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "set3DGroundLevel")}>set3DGroundLevel</a></li>
       <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "set3DGravity")}>set3DGravity</a></li>
       <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "set3DJumpStrength")}>set3DJumpStrength</a></li>
+            <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "getCameraPos")}>getCameraPos</a></li>
       <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "getCameraDirections")}>getCameraDirections</a></li>
       <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "moveCamera")}>moveCamera</a></li>
       <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#222831] rounded-lg py-2 px-4 cursor-pointer" on:click={changePage.bind(null, "rotateCamera")}>rotateCamera</a></li>

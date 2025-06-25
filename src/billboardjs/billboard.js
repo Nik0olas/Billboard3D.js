@@ -143,6 +143,14 @@ export function rotateCamera(dir, speed) {
   }
 }
 
+export function getCameraPos() {
+    return {
+        x: cameraX,
+        y: cameraY,
+        z: cameraZ
+    }
+}
+
 export function addInteractionBox(
   x,
   y,
