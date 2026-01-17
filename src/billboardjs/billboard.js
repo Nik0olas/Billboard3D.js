@@ -1,4 +1,4 @@
-let cameraX = 0
+let cameraX = -1
 let cameraY = 0
 let cameraZ = 0
 const distanceToScreen = 300
@@ -252,7 +252,7 @@ export function deleteAllCollisionBoxesWithTag(tag) {
   }
 }
 
-export function initBillboard() {
+export function billboard3djs() {
   onUpdate(() => {
     velY += gravity
 
@@ -363,6 +363,25 @@ export function initBillboard() {
       boxVis.obj.z = 10000
     }
   })
+
+  window.registerBlockType = registerBlockType
+  window.addBlock = addBlock
+  window.moveBlockToId = moveBlockToId
+  window.moveAllWithTag = moveAllWithTag
+  window.set3DGroundLevel = set3DGroundLevel
+  window.set3DGravity = set3DGravity
+  window.set3DJumpStrength = set3DJumpStrength
+  window.getCameraDirections = getCameraDirections
+  window.moveCamera = moveCamera
+  window.rotateCamera = rotateCamera
+  window.getCameraPos = getCameraPos
+  window.addInteractionBox = addInteractionBox
+  window.deleteAllCollisionBoxesWithTag = deleteAllCollisionBoxesWithTag
+  window.jumpCamera = jumpCamera
+  window.handleClickRaycast = handleClickRaycast
+  window.setCameraPos = setCameraPos
+
+
 }
 
 export function jumpCamera() {

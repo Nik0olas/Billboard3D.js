@@ -1,59 +1,55 @@
 <script>
-    import Prism from 'prismjs';
-    import 'prismjs/themes/prism-tomorrow.css'; // or any other theme you like
-    import 'prismjs/components/prism-javascript'; // highlight JS syntax
-    import { onMount } from 'svelte';
+  import Prism from "prismjs";
+  import "prismjs/themes/prism-tomorrow.css"; // or any other theme you like
+  import "prismjs/components/prism-javascript"; // highlight JS syntax
+  import { onMount } from "svelte";
 
-    let pageName = ""
-    let pageContent = ""
-    let code = ""
+  let pageName = "";
+  let pageContent = "";
+  let code = "";
 
-    onMount(() => {
-        // Load initial page based on URL hash
-        const hash = window.location.hash?.replace('#', '') || 'start';
-        changePage(hash);
+  onMount(() => {
+    // Load initial page based on URL hash
+    const hash = window.location.hash?.replace("#", "") || "start";
+    changePage(hash);
 
-        // Listen for hash changes (e.g. user clicks sidebar link or uses back/forward)
-        window.addEventListener("hashchange", () => {
-            const newHash = window.location.hash.replace('#', '');
-            changePage(newHash);
-        });
-        code = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+    // Listen for hash changes (e.g. user clicks sidebar link or uses back/forward)
+    window.addEventListener("hashchange", () => {
+      const newHash = window.location.hash.replace("#", "");
+      changePage(newHash);
     });
+    code = Prism.highlight(code, Prism.languages.javascript, "javascript");
+  });
 
-    function changePage(page) {
-        switch (page) {
-            case "start":
-                pageName = `Starting the project`
-                pageContent = `Welcome! In this documentation, you'll learn how to use the Billboard3D.js plugin with Kaplay.js. These docs cover the Billboard3D.js API, NOT the Kaplay.js API (but some aspects may appear). To learn more about Kaplay.js you can go to their official website https://kaplayjs.com/`
-                code = `
+  function changePage(page) {
+    switch (page) {
+      case "start":
+        pageName = `Starting the project`;
+        pageContent = `Welcome! In this documentation, you'll learn how to use the Billboard3D.js plugin with Kaplay.js. These docs cover the Billboard3D.js API, NOT the Kaplay.js API (but some aspects may appear). To learn more about Kaplay.js you can go to their official website https://kaplayjs.com/`;
+        code = `
 // Code examples will be shown here
-// Go to https://kaplayjs.com/ to learn more about the Kaplay.js API`
-                break
-            case "install":
-                pageName = "Instalation"
-                pageContent = "To add the plugin to your Kaplay project, simply include our CDN link. Alternatively, you can manually add the code by copying it directly from the CDN."
-                code = `
+// Go to https://kaplayjs.com/ to learn more about the Kaplay.js API`;
+        break;
+      case "install":
+        pageName = "Instalation";
+        pageContent =
+          "To add the plugin to your Kaplay project, simply include our CDN link. Alternatively, you can manually add the code by copying it directly from the CDN.";
+        code = `
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
-import { initBillboard } from "https://billboard3djs.nik.best/billboard.min.js";
+import { billboard3djs } from "https://billboard3djs.nik.best/billboard.min.js";
 
 kaplay();
-initBillboard(); // Make sure to start Billboard3D.js`
-                break
-            case "blocks":
-                pageName = "Blocks"
-                pageContent = `Blocks are visual sprites you can place anywhere in your 3D world. By default, they are purely decorative and have no built-in properties or behaviors. (Later in the docs, we'll cover how to use interaction boxes to add features like collisions.) \nBefore placing a block, you must first load the sprite using loadSprite from Kaplay, and then register it with registerBlock. See the examples below:`
-                code = `
+billboard3djs(); // Make sure to start Billboard3D.js`;
+        break;
+      case "blocks":
+        pageName = "Blocks";
+        pageContent = `Blocks are visual sprites you can place anywhere in your 3D world. By default, they are purely decorative and have no built-in properties or behaviors. (Later in the docs, we'll cover how to use interaction boxes to add features like collisions.) \nBefore placing a block, you must first load the sprite using loadSprite from Kaplay, and then register it with registerBlock. See the examples below:`;
+        code = `
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
-import {
-  initBillboard,
-  registerBlockType,
-  addBlock,
-  moveAllWithTag
-} from "https://billboard3djs.nik.best/billboard.min.js"; // Make sure to import the necessary functions
+import { billboard3djs } from "https://billboard3djs.nik.best/billboard.min.js";
 
 kaplay();
-initBillboard();
+billboard3djs();
 
 // Step 1: Load your sprites
 loadSprite("steel", "steel.png");
@@ -78,28 +74,19 @@ addBlock("BlockName", 100, 0, 200, {
 // To move blocks with a specific BillboardJS tag,
 // use the moveAllWithTag function.
 // This immediately teleports matching blocks to the given position.
-moveAllWithTag("Billboard3DJSBlockTag", 100, -200, 200);`
-                break
-            case "movement":
-                pageName = `Movement`
-                pageContent = `In this section, you'll learn how to set up basic player movement and camera controls for your 3D world including walking with WASD, rotating the camera with the mouse, and jumping with gravity.
+moveAllWithTag("Billboard3DJSBlockTag", 100, -200, 200);`;
+        break;
+      case "movement":
+        pageName = `Movement`;
+        pageContent = `In this section, you'll learn how to set up basic player movement and camera controls for your 3D world including walking with WASD, rotating the camera with the mouse, and jumping with gravity.
 
-Before you begin, make sure you've added at least a few blocks to your scene otherwise, it'll be hard to tell if anything's moving!`
-                code = `
+Before you begin, make sure you've added at least a few blocks to your scene otherwise, it'll be hard to tell if anything's moving!`;
+        code = `
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
-import {
-    initBillboard,
-    moveCamera,
-    rotateCamera,
-    set3DGroundLevel,
-    set3DGravity,
-    set3DJumpStrength,
-    jumpCamera
-
-} from "https://billboard3djs.nik.best/billboard.min.js"; // Make sure to import the necessary functions
+import { billboard3djs } from "https://billboard3djs.nik.best/billboard.min.js";
 
 kaplay()
-initBillboard()
+billboard3djs()
 
 // Make sure to add some blocks first so you can see yourself move!
 
@@ -150,24 +137,19 @@ set3DGravity(0.5) // Sets the gravity strength (default: 0.5)
 
 onKeyPress("space", () => {
     jumpCamera(); // Makes the camera jump when it's on the ground
-})`
-                break
-            case "interactionbox":
-                pageName = "Interaction Box"
-                pageContent = `Interaction boxes let you add interactivity to your 3D world. Whether it's creating a wall to stop player movement, detecting when a player enters a specific area, or responding to clicks. Interaction boxes are essential.
+})`;
+        break;
+      case "interactionbox":
+        pageName = "Interaction Box";
+        pageContent = `Interaction boxes let you add interactivity to your 3D world. Whether it's creating a wall to stop player movement, detecting when a player enters a specific area, or responding to clicks. Interaction boxes are essential.
 
-By combining them with blocks, you can bring your world to life and make your game truly functional.`
-                code = `
+By combining them with blocks, you can bring your world to life and make your game truly functional.`;
+        code = `
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
-import {
-    initBillboard,
-    addInteractionBox,
-    handleClickRaycast,
-    deleteAllCollisionBoxesWithTag
-} from "https://billboard3djs.nik.best/billboard.min.js"; // Make sure to import the necessary functions
+import { billboard3djs } from "https://billboard3djs.nik.best/billboard.min.js";
 
 kaplay()
-initBillboard()
+billboard3djs()
 
 // This creates a red interaction box. 
 // Interaction boxes can have custom sizes
@@ -217,19 +199,18 @@ addInteractionBox(600, 0, 200, 100, 100, 100, true, {
 })
     
 // To delete interaction boxes you can use deleteAllCollisionBoxesWithTag function
-deleteAllCollisionBoxesWithTag("interaction")`
-            break
-        case "ui":
-            pageName = "UI"
-            pageContent = "To add UI to your game simply add them like you would in Kaplay.js with the add(). Keep in mind that the closest block to you has a Z layer of 10000 (The farther away blocks are the smaller Z layer they get), which means if you want the UI to always be on top you have to have a Z layer of 10001 or higher."
-            code = `
+deleteAllCollisionBoxesWithTag("interaction")`;
+        break;
+      case "ui":
+        pageName = "UI";
+        pageContent =
+          "To add UI to your game simply add them like you would in Kaplay.js with the add(). Keep in mind that the closest block to you has a Z layer of 10000 (The farther away blocks are the smaller Z layer they get), which means if you want the UI to always be on top you have to have a Z layer of 10001 or higher.";
+        code = `
 import kaplay from "https://unpkg.com/kaplay@3001/dist/kaplay.mjs";
-import {
-    initBillboard
-} from "https://billboard3djs.nik.best/billboard.min.js"; // Make sure to import the necessary functions
+import { billboard3djs } from "https://billboard3djs.nik.best/billboard.min.js";
 
 kaplay()
-initBillboard()
+billboard3djs()
 
 loadSprite("hand", "hand.png")
 
@@ -238,26 +219,26 @@ const hand = add([
     pos(center()),
     anchor(bot),
     z(10001) // Make sure to have a Z layer of 10001 or higher
-])`
-            break
-        case "thatsit":
-            pageName = "That's it! 🥳"
-            pageContent = "Combining the Billboard3D.js API with the Kaplay.js API you can make a powerful 3D(-like) game!"
-            code = ""
-            break
-            default:
-                pageName = "Error"
-                pageContent = "Page not found."
-                code = ""
-        }
-    
+])`;
+        break;
+      case "thatsit":
+        pageName = "That's it! 🥳";
+        pageContent =
+          "Combining the Billboard3D.js API with the Kaplay.js API you can make a powerful 3D(-like) game!";
+        code = "";
+        break;
+      default:
+        pageName = "Error";
+        pageContent = "Page not found.";
+        code = "";
     }
+  }
 
-    function setPage(page) {
-        window.location.hash = page
-        window.scrollTo(0, 0)
-        window.location.reload()
-    }
+  function setPage(page) {
+    window.location.hash = page;
+    window.scrollTo(0, 0);
+    window.location.reload();
+  }
 </script>
 
 <div class="drawer lg:drawer-open bg-[#222831] text-[#EEEEEE]">
@@ -268,7 +249,9 @@ const hand = add([
   <div class="drawer-content flex flex-col p-8">
     <div class="space-y-6">
       <h1 class="text-3xl font-bold text-[#EEEEEE]">{pageName}</h1>
-      <p class="mt-2 text-lg text-[#EEEEEE] whitespace-pre-line">{pageContent}</p>
+      <p class="mt-2 text-lg text-[#EEEEEE] whitespace-pre-line">
+        {pageContent}
+      </p>
 
       <div class="mockup-code w-full bg-[#393E46] rounded-lg p-4 mt-4">
         <pre class="overflow-x-auto p-4 bg-[#393E46] rounded-lg text-[#EEEEEE]">
@@ -279,27 +262,66 @@ const hand = add([
 
   <!-- Sidebar -->
   <div class="drawer-side">
-    <label for="my-drawer-2" aria-label="Close Sidebar" class="drawer-overlay"></label>
+    <label for="my-drawer-2" aria-label="Close Sidebar" class="drawer-overlay"
+    ></label>
     <ul class="menu bg-[#393E46] text-[#EEEEEE] min-h-full w-80 p-6 space-y-4">
       <h1 class="text-3xl font-bold text-center">Billboard3D.js Docs</h1>
       <h2 class="mt-6 text-xl font-semibold">API:</h2>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => window.location.replace('/docs/api')}>View API</a></li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => window.location.replace("/docs/api")}>View API</a
+        >
+      </li>
 
       <h2 class="mt-6 text-xl font-semibold">Guides:</h2>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('start')}>Starting the project</a></li>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('install')}>Installation</a></li>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('blocks')}>Blocks</a></li>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('movement')}>Movement</a></li>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('interactionbox')}>Interaction Box</a></li>
-    <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('ui')}>UI</a></li>
-      <li><a class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4" on:click={() => setPage('thatsit')}>That's it!</a></li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("start")}>Starting the project</a
+        >
+      </li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("install")}>Installation</a
+        >
+      </li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("blocks")}>Blocks</a
+        >
+      </li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("movement")}>Movement</a
+        >
+      </li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("interactionbox")}>Interaction Box</a
+        >
+      </li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("ui")}>UI</a
+        >
+      </li>
+      <li>
+        <a
+          class="text-lg hover:bg-[#00ADB5] hover:text-[#EEEEEE] rounded-lg py-2 px-4"
+          on:click={() => setPage("thatsit")}>That's it!</a
+        >
+      </li>
     </ul>
   </div>
 </div>
 
-
-
 <style>
-    @import "tailwindcss";
-    @plugin "daisyui";
+  @import "tailwindcss";
+  @plugin "daisyui";
 </style>
